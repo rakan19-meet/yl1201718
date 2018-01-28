@@ -1,52 +1,48 @@
 from turtle import *
 import turtle
-import math
 import random
+
 colormode(255)
-
-
 running = True
 sleep = 0.0077
 screen_width =int(turtle.getcanvas().winfo_width()/2)
 screen_height = int(turtle.getcanvas().winfo_height()/2)
 
-
 class Ball(Turtle):
-	def __init__(self, x, y, dx, dy, r, color):
+	def __init__(self,x,y,dx,dy,r,color):
 		Turtle.__init__(self)
 		self.pu()
-		self.goto(x,y)
 		self.dx = dx
 		self.dy = dy
 		self.r = r
-		self.shape("circle")
+		self.x = x
+		self.y = y
 		self.shapesize(r/10)
-		self.color("red")
+		self.goto(x,y)
+		self.color(color)
+		self.shape("circle")
 
-
-
-	def move(self, screen_width, screen_height):
+	def move(self,width,height):
 		current_x = self.xcor()
+		new_x = current_x + self.dx 
 		current_y = self.ycor()
-		new_x = current_x + self.dx
 		new_y = current_y + self.dy
 		right_side_ball = new_x + self.r
 		left_side_ball = new_x - self.r
 		top_side_ball = new_y + self.r
 		bottom_side_ball = new_y - self.r
-		self.goto(new_x, new_y)
-	
+		self.goto(new_x,new_y)
 
-		if right_side_ball >= screen_width:
-			new_x = current_x - self.dx
+		if top_side_ball > height:
+			self.dy = - self.dy
 
-		elif left_side_ball >= -screen_width:
-			new_x = current_x + self.dx
+		elif bottom_side_ball < -height:
+			self.dy = -self.dy
 
-		elif top_side_ball >= screen_height:
-			new_y = current_y - self.dy
+		elif left_side_ball < -width:
+			self.dx = -self.dx
 
-		elif bottom_side_ball >= -screen_height:
-			new_y = current_y + self.dy
+		elif right_side_ball > width:
+			self.dx = -self.dx 
 
-
+MY_BALL = Ball(0,0,5,5,11,"red")
