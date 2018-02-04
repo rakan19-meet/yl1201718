@@ -6,19 +6,21 @@ from ball import *
 colormode(255)
 hideturtle()
 tracer(0)
+screen = turtle.Screen()
+screen.bgpic('agario_background.gif')
 
-number_of_BALLS = 5
+number_of_balls = 8
 minimum_ball_radius = 10
-maximum_ball_radius = 11
+maximum_ball_radius = 40
 minimum_ball_dx = -2
 maximum_ball_dx = 2
 minimum_ball_dy = -2
 maximum_ball_dy = 2
 balls =[]
 score = 0
-scoret = turtle.clone()
+scoress = turtle.clone()
 
-for i in range(number_of_BALLS):
+for i in range(number_of_balls):
 
 	screen_random1_x = int(-screen_width+maximum_ball_radius)
 	screen_random2_x = int(screen_width-maximum_ball_radius)
@@ -46,7 +48,7 @@ for i in range(number_of_BALLS):
 
 
 def move_all_balls():
-	for variable in range(number_of_BALLS):
+	for variable in range(number_of_balls):
 		balls[variable].move(screen_width,screen_height)
 
 def check_collide(ball_a,ball_b):
@@ -96,7 +98,7 @@ def check_all_balls_collision():
 					ball_b.shapesize(ball_b.r/10)
 					
 def check_myball_collision():	
-	global score , scoret, maximum_ball_radius		
+	global score , scoress, maximum_ball_radius		
 	for ball in balls:
 		random_x = random.randint(screen_random1_x,screen_random2_x)
 		random_y = random.randint(screen_random1_y,screen_random2_y)
@@ -112,19 +114,32 @@ def check_myball_collision():
 			radius3 = MY_BALL.r
 			radius4 = ball.r
 
+			
+
+
+
 			if MY_BALL.r < ball.r:
 				print("Game Over bb!!")
 				return 	False
+
+			if score == 3:
+				scoress.write("GOOD JOB!" + str(score),align="center",font=("Arial", 20, "bold"))
+
+			if score == 8:
+				scoress.write("KEEP GOING! " + str(score),align="center",font=("Arial", 20, "bold"))
+			if score == 15:
+				scoress.write(" YOU ARE ON FIREEE:P " + str(score),align="center",font=("Arial", 20, "bold"))
+					
 			else:
 				MY_BALL.r += 2
 				maximum_ball_radius += 4
 				MY_BALL.shapesize(MY_BALL.r/10)
 				score += 1
-				scoret.pu()
-				scoret.goto(0,250)
-				scoret.clear()
+				scoress.pu()
+				scoress.goto(0,250)
+				scoress.clear()
 
-				scoret.write("SCORE: " + str(score),align="center",font=("Arial", 20, "normal"))
+				scoress.write("score: " + str(score),align="center",font=("Arial", 20, "bold"))
 				ball.goto(random_x,random_y)
 				ball.dx = random_dx
 				while ball.dx == 0:
@@ -152,8 +167,9 @@ while running == True:
 	check_all_balls_collision()
 	if check_myball_collision() == False:
 		turtle.goto(0,0)
-		turtle.write("Game Over bb!!",align="center",font=("Arial", 50, "normal"))
-		time.sleep(5)
+		turtle.color("pink")		
+		turtle.write("Game Over bb!!",font=("Arial", 50, "bold",),align="center")
+		time.sleep(4)
 		turtle.bye()
 	getscreen().update()
 	time.sleep(sleep)
