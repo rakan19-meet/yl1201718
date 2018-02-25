@@ -122,13 +122,6 @@ def check_myball_collision():
 				print("Game Over bb!!")
 				return 	False
 
-			if score == 3:
-				scoress.write("GOOD JOB!" + str(score),align="center",font=("Arial", 20, "bold"))
-
-			if score == 8:
-				scoress.write("KEEP GOING! " + str(score),align="center",font=("Arial", 20, "bold"))
-			if score == 15:
-				scoress.write(" YOU ARE ON FIREEE:P " + str(score),align="center",font=("Arial", 20, "bold"))
 					
 			else:
 				MY_BALL.r += 2
