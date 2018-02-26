@@ -45,4 +45,5 @@ class Ball(Turtle):
 		elif right_side_ball > width:
 			self.dx = -self.dx 
 
-#MY_BALL = Ball(0,0,5,5,20,"Blue")
+MY_BALL = Ball(0,0,5,5,20,"red")
+

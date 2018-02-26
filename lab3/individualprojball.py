@@ -3,7 +3,7 @@ import turtle
 import time
 import random
 from ball import *
-colormode(255)
+turtle.colormode(255)
 hideturtle()
 tracer(0)
 screen = turtle.Screen()
@@ -166,4 +166,4 @@ while running == True:
 		turtle.bye()
 	getscreen().update()
 	time.sleep(sleep)
-mainloop()
+turtle.mainloop()
